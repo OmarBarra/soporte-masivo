@@ -2,7 +2,7 @@
   <div class="row justify-content-md-center">
     <div class="col-md-4">
       <img src="assets/images/logo.png" width="150px" class="user-avatar" />
-      <h1>Site Finanzas</h1>
+      <h1>Sistema de Gestión de Soporte Masivo</h1>
       <form role="form" novalidate [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="form-content">
           <div class="form-group" [ngClass]="{
@@ -34,7 +34,7 @@
             <p>{{ mensajeUsuario }}</p>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Ingresar</button>
+        <button type="submit" class="btn btn-light" [disabled]="!signupForm.valid">Ingresar</button>
         <!-- &nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a> -->
       </form>
