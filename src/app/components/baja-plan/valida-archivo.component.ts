@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { routerTransition } from '../../router.animations';
+import { routerTransition } from '../shared/router.animations';
 
 @Component({
   templateUrl: './valida-archivo.component.html',
