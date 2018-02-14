@@ -8,7 +8,7 @@ const routes: Routes = [
         path: '',
         component: ComponentsComponent,
         children: [
-          { path: '', redirectTo: 'baja-plan' },
+          { path: '', redirectTo: 'inicio' },
           { path: 'inicio', loadChildren: './inicio/inicio.module#InicioModule' },
           { path: 'baja-plan', loadChildren: './baja-plan/baja-plan.module#BajaPlanModule' }
         ]
