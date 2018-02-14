@@ -1,3 +1,109 @@
-<p>
-  valida-archivo works!
-</p>
+<div [@routerTransition]>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Baja de plan - Validación de archivo</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-secondary text-white">
+          Lineas inválidas : 2
+        </div>
+      </div>
+
+      <div class="table-fixed">
+        <table id="idTablaInvalid" class="table table-sm table-bordered">
+          <thead>
+            <tr>
+              <th>Fila</th>
+              <th>Teléfono</th>
+              <th>Estatus</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100</td>
+              <td>5510104569</td>
+              <td>Error</td>
+              <td>Producto de agenda debe ser a 5 caracteres</td>
+            </tr>
+            <tr>
+              <td>850</td>
+              <td>5510104569</td>
+              <td>Error</td>
+              <td>Cuenta debe ser numérica</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-info text-white">
+          Lineas válidas : 5
+        </div>
+      </div>
+
+      <div class="table-fixed bordered-bottom">
+        <table id="idTablaValid" class="table table-sm table-bordered">
+          <thead>
+            <tr>
+              <th>Teléfono</th>
+              <th>Estatus</th>
+              <th>Detalle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>5510104569</td>
+              <td>Ok</td>
+              <td>Formato correcto</td>
+            </tr>
+            <tr>
+              <td>5510204568</td>
+              <td>Ok</td>
+              <td>Formato correcto</td>
+            </tr>
+            <tr>
+              <td>5510204561</td>
+              <td>Ok</td>
+              <td>Formato correcto</td>
+            </tr>
+            <tr>
+              <td>5510204528</td>
+              <td>Ok</td>
+              <td>Formato correcto</td>
+            </tr>
+            <tr>
+              <td>5510204533</td>
+              <td>Ok</td>
+              <td>Formato correcto</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <form>
+    <div class="form-row mt-3">
+      <div class="form-group col-md-6">
+        <a href="javascript:void(0)" class="btn btn-secondary float-right">Exportar</a>
+      </div>
+      <div class="form-group col-md-6">
+        <a href="javascript:void(0)" class="btn btn-primary">Enviar</a>
+      </div>
+    </div>
+  </form>
+</div>
