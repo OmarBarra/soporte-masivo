@@ -1,0 +1,43 @@
+<div [@routerTransition]>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Baja de plan - Ingreso de archivo</li>
+    </ol>
+  </nav>
+
+  <form novalidate (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label">Región</label>
+      <div class="col-sm-3">
+        <select class="form-control">
+          <option selected>R09</option>
+          <option>...</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label">Ciclo</label>
+      <div class="col-sm-3">
+        <select class="form-control">
+          <option selected>09</option>
+          <option>...</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-1 col-form-label">Archivo</label>
+      <div class="col-sm-3">
+        <input type="file" class="form-control-file">
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-3">
+        <a [routerLink]="['/baja-plan/valida-archivo']" class="btn btn-primary">Enviar</a>
+        <!-- <button type="submit" class="btn btn-primary">Enviar</button> -->
+      </div>
+    </div>
+  </form>
+</div>
