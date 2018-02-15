@@ -1,11 +1,11 @@
 var http = require('http'),
-	conf = require('./conf'),
-	expressServer = require('./server/expressServer');
+	conf = require('./config/conf'),
+	expressServer = require('./expressServer');
 
 var Workers = function(config){
 	config = config || {}
 
-	
+
 	console.log('Inicia conexión');
 
 	var app = new expressServer({parameters : conf });

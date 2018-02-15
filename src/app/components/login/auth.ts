@@ -1,5 +1,4 @@
 export interface IAuth {
-  Cias: string,
-  NombreCompleto: string,
-  MensajeUsuario: string
+  NombreCompleto: string;
+  MensajeUsuario: string;
 }

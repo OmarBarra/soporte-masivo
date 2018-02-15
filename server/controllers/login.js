@@ -13,7 +13,7 @@ var Login = function (conf) {
   };
 };
 
-// /api/login/internos
+// /api/login/
 // Funcionalidad de login
 Login.prototype.get_auth = function (req, res, next) {
   var self = this;
@@ -28,20 +28,25 @@ Login.prototype.get_auth = function (req, res, next) {
     { name: 'MensajeUsuario', value: mensajeUsuario, type: self.model.types.STRING }
   ];
 
-  this.model.query('SP_LogiWebSiteFinzas', params, function (error, result) {
-    //Cuando la contraseña es incorrecta, no existe el objeto result
-    if (typeof result === 'undefined') {
-      result = [{ 'MensajeUsuario': 'La contraseña es incorrecta' }];
-    }
+  // this.model.query('SP_NAME', params, function (error, result) {
+  //   //Cuando la contraseña es incorrecta, no existe el objeto result
+  //   if (typeof result === 'undefined') {
+  //     result = [{ 'MensajeUsuario': 'La contraseña es incorrecta' }];
+  //   }
 
-    if (result.length > 0) {
-      console.log("result " + result[0]);
-    }
+  //   if (result.length > 0) {
+  //     console.log("result " + result[0]);
+  //   }
 
-    self.view.expositor(res, {
-      error: error,
-      result: result,
-    });
+  //   self.view.expositor(res, {
+  //     error: error,
+  //     result: result,
+  //   });
+  // });
+
+  self.view.expositor(res, {
+    error: null,
+    result: [{ 'NombreCompleto': 'Mario García', 'MensajeUsuario': '' }]
   });
 };
 

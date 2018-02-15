@@ -4,10 +4,10 @@ var router = express.Router();
 var sql = require('mssql'),
     config = {
     "port": 4200,
-	  "SQL_user": "sa",
-    "SQL_password": "S0p0rt3",
-    "SQL_server": "192.168.20.57",
-    "SQL_database": "xgaBProFinanzas",
+    "SQL_user": "sa",
+    "SQL_password": "pass",
+    "SQL_server": "0.0.0.0",
+    "SQL_database": "DB",
     "SQL_connectionTimeout": 60000
 
 } ;

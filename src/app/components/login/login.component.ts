@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     if (this.signupForm.valid) {
       this.mensajeUsuario = '';
-      this.onLoggedIn();
+      this.getAuth();
     }
   }
 
