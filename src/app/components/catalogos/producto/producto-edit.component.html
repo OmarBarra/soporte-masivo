@@ -1,0 +1,48 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/producto']">Productos</a>
+      </li>
+      <li class="breadcrumb-item active">{{ pageTitle }}</li>
+    </ol>
+  </nav>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="producto" class="col-sm-2 col-form-label">Producto</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="producto" placeholder="Producto" formControlName="PRODUCTO" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.PRODUCTO.valid }">
+        <div *ngIf='!productForm.controls.PRODUCTO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="descripcion" placeholder="Descripcion" formControlName="DESCRIPCION" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.DESCRIPCION.valid }">
+        <div *ngIf='!productForm.controls.DESCRIPCION.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="activo" placeholder="activo" formControlName="ACTIVO" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.ACTIVO.valid }">
+        <div *ngIf='!productForm.controls.ACTIVO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

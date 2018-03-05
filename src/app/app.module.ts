@@ -10,6 +10,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './components/shared';
 
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+
 // AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   // for development
@@ -30,7 +32,9 @@ export function createTranslateLoader(http: HttpClient) {
         deps: [HttpClient]
       }
     }),
-    AppRoutingModule
+    AppRoutingModule,
+    OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
   ],
   declarations: [AppComponent],
   providers: [AuthGuard],

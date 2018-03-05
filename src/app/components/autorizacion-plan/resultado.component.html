@@ -1,0 +1,35 @@
+<div [@routerTransition]>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/inicio']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Autorización de Cambio de Plan / Resultado</li>
+        </ol>
+    </nav>
+    
+    <div class="col-sm-12">
+        <table border="0" width="60%" class="table-center">
+            <tr>
+                <td class="text-center">
+                    <i [hidden]="tipo == 1" class="fa fa-check-circle i-success text-warning" aria-hidden="true"></i>
+                    <i [hidden]="tipo == 0" class="fa fa-check-circle i-success text-info" aria-hidden="true"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p class="p-msg text-center" [hidden]="tipo == 1">El folio <b>{{ folio }}</b> se rechazó para su procesamiento.</p>
+                    <p class="p-msg text-center" [hidden]="tipo == 0">El folio <b>{{ folio }}</b> se autorizó para su procesamiento, favor de dar seguimiento en el Reporte de Movimientos.</p>
+                </td>
+            </tr>
+        </table>        
+    </div>
+
+    <form class="col-md-12 mt-3">
+        <a  [routerLink]="['/autorizacion']"
+            class="btn btn-primary pull-right mt-3"
+            [hidden]="expandError">
+            <i class="fa fa-check" aria-hidden="true"></i> Aceptar
+        </a>
+    </form>
+</div>

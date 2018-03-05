@@ -1,109 +1,158 @@
 <div [@routerTransition]>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a [routerLink]="['/inicio']">Inicio</a>
-      </li>
-      <li class="breadcrumb-item active">Baja de plan - Validación de archivo</li>
-    </ol>
-  </nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/inicio']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Baja de plan / Validación de archivo</li>
+        </ol>
+    </nav>
+    <div class="row" [hidden]="expandSuccess || success == 0">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-faded">
+                    <span class="pull-left">Lineas inválidas : {{totalRespuestas.fallido}}</span>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-secondary text-white">
-          Lineas inválidas : 2
+                    <!-- Button to expand panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('error')"
+                            [hidden]="expandError">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                    </button><!-- / -->
+
+                    <!-- Button to retract panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('retract')"
+                            [hidden]="!expandError">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button><!-- / -->
+                </div>
+                <div class="card-block">
+                    <div [ngClass]="{'table-fixed': !expandError, 'table-fixed-expand': expandError}">
+                        <table id="idTablaInvalid" class="table table-sm table-hover" style="font-size: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Teléfono</th>
+                                    <th>Estatus</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let line of fallido">
+                                    <td>{{line.linea}}</td>
+                                    <td> <span class="badge badge-danger"> Error </span></td>
+                                    <td>{{line.detalle}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <br>
         </div>
-      </div>
-
-      <div class="table-fixed">
-        <table id="idTablaInvalid" class="table table-sm table-bordered">
-          <thead>
-            <tr>
-              <th>Fila</th>
-              <th>Teléfono</th>
-              <th>Estatus</th>
-              <th>Detalle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>100</td>
-              <td>5510104569</td>
-              <td>Error</td>
-              <td>Producto de agenda debe ser a 5 caracteres</td>
-            </tr>
-            <tr>
-              <td>850</td>
-              <td>5510104569</td>
-              <td>Error</td>
-              <td>Cuenta debe ser numérica</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header bg-info text-white">
-          Lineas válidas : 5
+    <div class="row" [hidden]="expandError || success == 0">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-faded">
+                    <span class="pull-left"><b>Lineas válidas : {{totalRespuestas.correcto}}</b></span>
+
+                    <!-- Button to expand panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('success')"
+                            [hidden]="expandSuccess">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                    </button><!-- / -->
+
+                    <!-- Button to retract panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('retract')"
+                            [hidden]="!expandSuccess">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button><!-- / -->
+                </div>
+                <div class="card-block">
+                    <div [ngClass]="{'table-fixed': !expandSuccess, 'table-fixed-expand': expandSuccess}">
+                        <table id="idTablaValid" class="table table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Teléfono</th>
+                                    <th>Estatus</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let line of correcto">
+                                    <td>{{line.linea}}</td>
+                                    <td> <span class="badge badge-success"> Ok </span></td>
+                                    <td>{{line.detalle}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
+    </div>
 
-      <div class="table-fixed bordered-bottom">
-        <table id="idTablaValid" class="table table-sm table-bordered">
-          <thead>
+
+    <form class="col-md-12 mt-3" [hidden]="success == 0 ">
+        <a (click)="exportarDatos()"
+              class="btn btn-success pull-left mt-3">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar
+        </a>
+
+        <!-- <a  *ngIf="xls" href="{{xls}}" download
+              class="btn btn-success pull-left mt-3">
+            <i class="fa fa-download" aria-hidden="true"></i> Descargar
+        </a> -->
+
+        <a  (click)="enviarDatos()"
+            class="btn btn-primary pull-right mt-3"
+            [hidden]="expandError || !showBtnSend">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i> Enviar
+        </a>
+
+        <!-- Button to return to the loading file panel -->
+        <a  [routerLink]="['/baja-plan']"
+            [hidden] = " expandError != expandSuccess"
+            class="btn btn-secondary pull-right mt-3"
+            style="margin: 0 10px;">
+            <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+        </a> <!-- / -->
+
+        <!-- Button to retract data rows panel -->
+        <a  (click)="expandPanel('retract')"
+            [hidden] = " expandError == expandSuccess"
+            class="btn btn-secondary pull-right mt-3"
+            style="margin: 0 10px;">
+            <i class="fa fa-minus" aria-hidden="true"></i> Cancelar
+        </a> <!-- / -->
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    </form>
+
+
+    <div class="col-sm-12" [hidden]="success == 1">
+        <table border="0" width="60%" class="table-center">
             <tr>
-              <th>Teléfono</th>
-              <th>Estatus</th>
-              <th>Detalle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>5510104569</td>
-              <td>Ok</td>
-              <td>Formato correcto</td>
+                <td class="text-center">
+                    <i class="fa fa-times-circle i-success text-danger" aria-hidden="true"></i>
+                </td>
             </tr>
             <tr>
-              <td>5510204568</td>
-              <td>Ok</td>
-              <td>Formato correcto</td>
+                <td>
+                    <p class="p-msg">El layout que proporcionó no cuenta con la estructura requerida para ser procesado, intente de nuevo.</p>
+                </td>
             </tr>
-            <tr>
-              <td>5510204561</td>
-              <td>Ok</td>
-              <td>Formato correcto</td>
-            </tr>
-            <tr>
-              <td>5510204528</td>
-              <td>Ok</td>
-              <td>Formato correcto</td>
-            </tr>
-            <tr>
-              <td>5510204533</td>
-              <td>Ok</td>
-              <td>Formato correcto</td>
-            </tr>
-          </tbody>
         </table>
-      </div>
-
     </div>
-  </div>
 
-  <form>
-    <div class="form-row mt-3">
-      <div class="form-group col-md-6">
-        <a href="javascript:void(0)" class="btn btn-secondary float-right">Exportar</a>
-      </div>
-      <div class="form-group col-md-6">
-        <a href="javascript:void(0)" class="btn btn-primary">Enviar</a>
-      </div>
-    </div>
-  </form>
+    <form class="col-md-12 mt-3" [hidden]="success == 1">
+        <a  [routerLink]="['/baja-plan']"
+            class="btn btn-primary pull-right mt-3"
+            [hidden]="expandError">
+            <i class="fa fa-check" aria-hidden="true"></i> Aceptar
+        </a>
+    </form>
 </div>

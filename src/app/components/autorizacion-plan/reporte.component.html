@@ -1,0 +1,114 @@
+<div [@routerTransition]>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/inicio']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Autorización de Cambio de Plan / Reporte de Cuota por Cambio de Plan</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-1">
+            <small>Folio</small>
+            <p><b>{{folio}}</b></p>
+        </div>
+        <div class="col-md-1">
+            <small>Región</small>
+            <p><b>{{rowFolio.REGION}}</b></p>
+        </div>
+        <div class="col-md-1">
+            <small>Ciclo</small>
+            <p><b>{{rowFolio.CICLO}}</b></p>
+        </div>
+        <div class="col-md-6">
+            <small>Fecha de ejecución</small>
+            <p><b>{{rowFolio.FECHA_EXE.split('T')[0]}}</b></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-faded">
+                    <span class="pull-left"><b>Lineas válidas </b></span>
+
+                    <!-- Button to expand panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('success')"
+                            [hidden]="expandSuccess">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                    </button><!-- / -->
+
+                    <!-- Button to retract panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('retract')"
+                            [hidden]="!expandSuccess">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button><!-- / -->
+                </div>
+                <div class="card-block">
+                    <div [ngClass]="{'table-fixed': !expandSuccess, 'table-fixed-expand': expandSuccess}">
+                        <table id="idTablaValid" class="table table-sm" style="font-size: 12px;">
+                            <thead>
+                                <tr style="height: 40px">
+                                    <th width="40" class="text-center">
+                                        <input type="checkbox" name="" checked="" [(ngModel)]="selectedAll" (change)="selectAll();">
+                                    </th>
+                                    <th>Teléfono</th>
+                                    <th>Estatus</th>
+                                    <th>Plan Actual</th>
+                                    <th>Nuevo Plan</th>
+                                    <th>% Bonificación</th>
+                                    <th>Cuota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let line of lineas.data">
+                                    <td class="text-center">
+                                        <input type="checkbox" [(ngModel)]="line.selected" (change)="checkIfAllSelected();">
+                                    </td>
+                                    <td>{{line.LINEA}}</td>
+                                    <td>{{line.ESTATUS}} -- {{line.DESCRIPCION}}</td>
+                                    <td>{{line.PLAN_ACTUAL}} </td>
+                                    <td>{{line.PLAN_NUEVO}} </td>
+                                    <td>{{line.BONIFICACION}}</td>
+                                    <td>{{line.CUOTA}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <form class="col-md-12 mt-3">
+        <a (click)="exportarDatos()"
+              class="btn btn-success pull-left mt-3">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar
+        </a>
+
+        <!-- <a  *ngIf="xls" href="{{xls}}" download
+              class="btn btn-success pull-left mt-3">
+            <i class="fa fa-download" aria-hidden="true"></i> Descargar
+        </a> -->
+
+        <div class="pull-right">
+            <!-- Button to return to the loading file panel -->
+            <a  (click)="aceptarFolio()"
+                class="btn btn-primary mt-3 btn-cursor" [hidden]="countSelected == 0">
+                <i class="fa fa-paper-plane" aria-hidden="true"></i> Aceptar
+            </a>
+
+            <a  (click)="rechazarFolio();"
+                class="btn btn-warning mt-3"
+                style="margin-left: 10px;">
+                <i class="fa fa-ban" aria-hidden="true"></i> Rechazar
+            </a> <!-- / -->
+
+
+        </div>
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+    </form>
+</div>

@@ -1,22 +1,50 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
   <ul class="list-group">
       <a [routerLink]="['/inicio']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-          {{ 'Inicio' | translate }}
+          <i class="fa fa-home"></i> {{ 'Inicio' | translate }}
     </a>
     <a [routerLink]="['/baja-plan']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-          {{ 'Baja de plan' | translate }}
+          <i class="fa fa-minus-circle"></i> {{ 'Baja de agenda' | translate }}
     </a>
+    <a [routerLink]="['/cambio-plan']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-retweet"></i> {{ 'Cambio de plan' | translate }}
+    </a>
+    <a [routerLink]="['/autorizacion']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <table width="100%" border="0">
+            <tr>
+                <td width="30"> <i class="fa fa-key"></i> </td>
+                <td> {{ 'Autorización de cambio de plan' | translate }} </td>
+            </tr>
+        </table>
+    </a>
+    
+    <div class="nested-menu">
+        <a class="list-group-item" (click)="addExpandClass('catalogos')">
+            <span><i class="fa fa-plus"></i>&nbsp; {{ 'Catálogos' | translate }}</span>
+        </a>
+        <li class="nested" [class.expand]="showMenu === 'catalogos'">
+            <ul class="submenu">
+                <li>
+                    <a [routerLink]="['/producto']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                        <span>{{ 'Producto' | translate }}</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                </li>
+            </ul>
+        </li>
+    </div>
     <a [routerLink]="['/']" [routerLinkActive]="" class="list-group-item">
-          {{ 'Cambio de plan' | translate }}
+        <table width="100%" border="0">
+            <tr>
+                <td width="30"> <i class="fa fa-bar-chart"></i> </td>
+                <td> {{ 'Reporte de movimientos' | translate }} </td>
+            </tr>
+        </table>
     </a>
-    <a [routerLink]="['/']" [routerLinkActive]="" class="list-group-item">
-          {{ 'Autorización de cambio de plan' | translate }}
-    </a>
-    <a [routerLink]="['/']" [routerLinkActive]="" class="list-group-item">
-          {{ 'Reporte de movimientos' | translate }}
-    </a>
-   
-      <!-- 
+
+      <!--
       <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
           <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
       </a>

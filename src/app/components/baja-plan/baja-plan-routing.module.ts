@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BajaPlanComponent } from './baja-plan.component';
 import { ValidaArchivoComponent } from './valida-archivo.component';
+import { ResultadoComponent } from './resultado.component';
 
 const routes: Routes = [
     {
@@ -11,6 +12,10 @@ const routes: Routes = [
     {
         path: 'valida-archivo',
         component: ValidaArchivoComponent
+    },
+    {
+        path: 'resultado',
+        component: ResultadoComponent
     }
 ];
 

@@ -56,24 +56,25 @@ export class LoginComponent implements OnInit {
 
   // Invoca el servicio de Login
   getAuth(): void {
-    this._service.getAuth({
-      usuario: this.usuario.value,
-      password: this.password.value,
-      mensajeUsuario: ''
-    })
-      .subscribe(
-        auth => { this.authUsuario = auth; },
-        error => { this.mensajeUsuario = <any>error; },
-      () => {
-          // Cuando el servicio no regresa un mensaje de usuario, significa que
-          // la autenticación es correcta.
-          if (!this.authUsuario[0].MensajeUsuario) {
-            this.onLoggedIn();
-          } else {
-            this.mensajeUsuario = this.authUsuario[0].MensajeUsuario;
-          }
-        } // LocalStorage para el usuario?
-      );
+    this.onLoggedIn();
+    // this._service.getAuth({
+    //   usuario: this.usuario.value,
+    //   password: this.password.value,
+    //   mensajeUsuario: ''
+    // })
+    //   .subscribe(
+    //     auth => { this.authUsuario = auth; },
+    //     error => { this.mensajeUsuario = <any>error; },
+    //   () => {
+    //       // Cuando el servicio no regresa un mensaje de usuario, significa que
+    //       // la autenticación es correcta.
+    //       if (!this.authUsuario[0].MensajeUsuario) {
+    //         this.onLoggedIn();
+    //       } else {
+    //         this.mensajeUsuario = this.authUsuario[0].MensajeUsuario;
+    //       }
+    //     } // LocalStorage para el usuario?
+    //   );
   }
 
   createFormControls() {

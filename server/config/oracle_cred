@@ -1,0 +1,5 @@
+{
+    "user"          : "SYSTEM",
+    "password"      : "oracle123",
+    "connectString" : "localhost/soma"
+  }

@@ -1,0 +1,5 @@
+{
+    "user"          : "SVADM01",
+    "password"      : "Moviles.01",
+    "connectString" : "10.119.160.85:1583/SOMA"
+  }

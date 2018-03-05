@@ -16,10 +16,16 @@
           "testTsconfig": "tsconfig.spec.json",
           "prefix": "wsf",
           "styles": [
+              "../node_modules/sweetalert2/dist/sweetalert2.css",
               "../node_modules/font-awesome/css/font-awesome.css",
+              "../node_modules/ng-pick-datetime/assets/style/picker.min.css",
               "styles/app.scss"
           ],
-          "scripts": ["../node_modules/chart.js/dist/Chart.js"],
+          "scripts": [
+            "../node_modules/sweetalert2/dist/sweetalert2.js",
+            "../node_modules/chart.js/dist/Chart.js"
+
+          ],
           "environmentSource": "environments/environment.ts",
           "environments": {
               "dev": "environments/environment.ts",

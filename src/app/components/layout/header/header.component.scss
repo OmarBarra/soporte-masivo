@@ -1,4 +1,5 @@
-$topnav-background-color: #0b4da2;
+// $topnav-background-color: #0b4da2;
+$topnav-background-color: #00458a; 
 :host {
     .navbar {
         background-color: $topnav-background-color;
@@ -45,6 +46,6 @@ $topnav-background-color: #0b4da2;
       border-radius: 0.25rem;
     }
     .logo {
-        width: 120px;
+        width: 150px;
     }
 }

@@ -1,4 +1,5 @@
-$topnav-background-color: #0b4da2;
+// $topnav-background-color: #0b4da2;
+$topnav-background-color: #F2F7F9;
 .sidebar {
     border-radius: 0;
     position: fixed;
@@ -25,7 +26,8 @@ $topnav-background-color: #0b4da2;
             background: $topnav-background-color;
             border: 0;
             border-radius: 0;
-            color: #ced5dd;
+            // color: #ced5dd;
+            color: #000;
             text-decoration: none;
             .fa {
                 margin-right: 10px;
@@ -33,11 +35,16 @@ $topnav-background-color: #0b4da2;
         }
         a:hover {
             background: darken($topnav-background-color, 5%);
-            color: #fff;
+            color: #000;            
         }
         a.router-link-active {
             background: darken($topnav-background-color, 5%);
-            color: #fff;
+            color: #000;
+            font-weight: bold;
+        }
+
+        i.fa {
+            color: #FBBB08 !important;
         }
     }
     .sidebar-dropdown {
@@ -111,7 +118,7 @@ $topnav-background-color: #0b4da2;
             height: auto;
             li {
                 a {
-                    color: #fff;
+                    color: #000;
                     padding: 10px;
                     display: block;
                 }

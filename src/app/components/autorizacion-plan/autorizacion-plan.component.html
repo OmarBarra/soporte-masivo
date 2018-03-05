@@ -1,0 +1,115 @@
+<div [@routerTransition] >
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a [routerLink]="['/inicio']">Inicio</a>
+            </li>
+            <li class="breadcrumb-item active">Autorización de Cambio de Plan / Folios</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-faded">
+                    <span class="pull-left"><b>Folios pendientes de Autorización </b></span>
+
+                    <!-- Button to expand panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('success')"
+                            [hidden]="expandSuccess">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                    </button> <!-- / -->
+
+                    <!-- Button to retract panel -->
+                    <button class="btn btn-light pull-right btn-cursor"
+                            (click)="expandPanel('retract')"
+                            [hidden]="!expandSuccess">
+                        <i class="fa fa-minus" aria-hidden="true"></i>
+                    </button> <!-- / -->
+                </div>
+                <div class="card-block">
+                    <div [ngClass]="{'table-fixed': !expandSuccess, 'table-fixed-expand': expandSuccess}">
+                    <!-- <div> -->
+                        <table id="idTablaValid" class="table table-sm table-hover" style="font-size: 12px;">
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Ciclo</th>
+                                    <th>Región</th>
+                                    <th>Cantidad de Líneas</th>
+                                    <th>Líneas Correctas</th>
+                                    <th>Fecha Alta</th>
+                                    <th>Fecha Ejecución</th>
+                                    <th>Detalle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let folio of folios.data; let i = index">
+                                    <td>{{folio.ID_FOLIO}}</td>
+                                    <td>{{folio.CICLO}}</td>
+                                    <td>{{folio.REGION}}</td>
+                                    <td>{{folio.LINEAS}}</td>
+                                    <td>{{folio.LINEASOK}}</td>
+                                    <td>{{folio.FECHA_ALTA.split('T')[0]}}</td>
+                                    <td>{{folio.FECHA_EXE.split('T')[0]}}</td>
+                                    <td> <span class="link" (click)="verMas( i )">Ver</span> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form [formGroup]="frmCambioPlan" (ngSubmit)="onSubmit()" [hidden]="true">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Región</label>
+            <div class="col-sm-3">
+                <select class="form-control" formControlName="region" (change)="onRegionChange($event)">
+                    <option *ngFor=" let row of arrayRegion.data; let i = index" value="{{row.ID_REGION}}" >{{ row.REGION }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Ciclo</label>
+            <div class="col-sm-3">
+                <select class="form-control" formControlName="ciclo">
+                    <option *ngFor="let row of arrayCilco.data" value="{{row.ID_CICLO}}">{{ row.CICLO < 10 ? '0' + row.CICLO : row.CICLO }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Archivo</label>
+            <div class="col-sm-3">
+                <input #myInput
+                    type="file"
+                    ng-model="layout"
+                    class="form-control-file"
+                    (change)="onFileChange($event)"
+                    accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <input type="hidden" name="" formControlName="fileInput">
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Fecha de ejecución</label>
+            <div class="col-sm-3">
+                <input [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" class="form-control" formControlName="fechaEjecucion">
+                <owl-date-time [pickerType]="'calendar'" #dt3></owl-date-time>
+            </div>
+        </div>
+
+        <!-- <input [owlDateTime]="dt3" [owlDateTimeTrigger]="dt3" placeholder="Date Time">
+        <owl-date-time #dt3></owl-date-time> -->
+
+        <div class="form-group row">
+            <div class="col-sm-3">
+                <a  (click)="validaArchivo()" class="btn btn-primary">Enviar</a>
+                <!-- <button type="submit" class="btn btn-primary">Enviar</button> -->
+            </div>
+        </div>
+    </form>
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+</div>
