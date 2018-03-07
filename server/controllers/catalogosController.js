@@ -48,9 +48,38 @@ function setProducto(req,res) {
   });
 }
 
+function regiones(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getRegiones(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de regiones Activas', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setRegiones(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let region = req.body.region;
+  let activo = req.body.activo;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setRegiones(idCrud, id, region, activo)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de regiones Activas', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
     producto,
-    setProducto
+    setProducto,
+    regiones,
+    setRegiones
 };

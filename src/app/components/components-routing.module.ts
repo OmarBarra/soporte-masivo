@@ -14,7 +14,8 @@ const routes: Routes = [
           { path: 'baja-plan', loadChildren: './baja-plan/baja-plan.module#BajaPlanModule' },
           { path: 'cambio-plan', loadChildren: './cambio-plan/cambio-plan.module#CambioPlanModule' },
           { path: 'autorizacion', loadChildren: './autorizacion-plan/autorizacion-plan.module#AutorizacionPlanModule' },
-          { path: 'producto', loadChildren: './catalogos/producto/producto.module#ProductoModule' }
+          { path: 'producto', loadChildren: './catalogos/producto/producto.module#ProductoModule' },
+          { path: 'region', loadChildren: './catalogos/region/region.module#RegionModule' }
         ]
     }
 ];

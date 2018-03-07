@@ -30,7 +30,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    <a [routerLink]="['/region']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+                        <span>{{ 'Región' | translate }}</span>
+                    </a>
                 </li>
             </ul>
         </li>

@@ -1,0 +1,39 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/region']">Regiones</a>
+      </li>
+      <li class="breadcrumb-item active">{{ pageTitle }}</li>
+    </ol>
+  </nav>
+
+  <form [formGroup]="regionForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="region" class="col-sm-2 col-form-label">Region</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="region" placeholder="Region" formControlName="REGION" [ngClass]="{'is-invalid': regionForm.dirty && !regionForm.controls.REGION.valid }">
+        <div *ngIf='!regionForm.controls.REGION.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="activo" placeholder="activo" formControlName="ACTIVO" [ngClass]="{'is-invalid': regionForm.dirty && !regionForm.controls.ACTIVO.valid }">
+        <div *ngIf='!regionForm.controls.ACTIVO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" [disabled]="!regionForm.valid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,55 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de Región</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">Regiones</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/region/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_REGION</th>
+                <th>REGION</th>
+                <th>ACTIVO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of regiones'>
+                <td>{{ p.ID_REGION}}</td>
+                <td>{{ p.REGION}}</td>
+                <td>{{ p.ACTIVO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/region/edit', p.ID_REGION]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteRegion(p.ID_REGION)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
