@@ -18,7 +18,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     ComponentsRoutingModule,
     TranslateModule,
     NgbDropdownModule.forRoot(),
-    OwlDateTimeModule, 
+    OwlDateTimeModule,
     OwlNativeDateTimeModule
   ],
   declarations: [ComponentsComponent, HeaderComponent, SidebarComponent]

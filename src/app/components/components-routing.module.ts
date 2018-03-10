@@ -15,7 +15,8 @@ const routes: Routes = [
           { path: 'cambio-plan', loadChildren: './cambio-plan/cambio-plan.module#CambioPlanModule' },
           { path: 'autorizacion', loadChildren: './autorizacion-plan/autorizacion-plan.module#AutorizacionPlanModule' },
           { path: 'producto', loadChildren: './catalogos/producto/producto.module#ProductoModule' },
-          { path: 'region', loadChildren: './catalogos/region/region.module#RegionModule' }
+          { path: 'region', loadChildren: './catalogos/region/region.module#RegionModule' },
+          { path: 'ciclo', loadChildren: './catalogos/ciclo/ciclo.module#CicloModule' }
         ]
     }
 ];

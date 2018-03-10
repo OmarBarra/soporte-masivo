@@ -221,11 +221,108 @@ function setRegiones(idCrud, id, region, activo) {
   });
 }
 
+function getCiclos(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM CAT_CICLO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM CAT_CICLO WHERE ID_CICLO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setCiclos(idCrud, id, ciclo, activo, descripcion) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO CAT_CICLO
+                          (
+                            CICLO ,
+                            ACTIVO ,
+                            DESCRIPCION
+                          )
+                          VALUES
+                          (
+                            :ciclo ,
+                            :activo ,
+                            :descripcion
+                          )`;
+
+        bindVars = {
+          ciclo: ciclo, // default direction is BIND_IN. Data type is inferred from the data
+          activo: +activo,
+          descripcion: descripcion
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE CAT_CICLO
+                  SET CICLO      = :ciclo ,
+                      ACTIVO          = :activo ,
+                      DESCRIPCION     = :descripcion
+                  WHERE ID_CICLO = :id`;
+
+        bindVars = {
+          id: id,
+          ciclo: ciclo, // default direction is BIND_IN. Data type is inferred from the data
+          activo: activo,
+          descripcion: descripcion,
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE CAT_CICLO
+                  WHERE ID_CICLO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
   getProducto,
   setProducto,
   getRegiones,
-  setRegiones
+  setRegiones,
+  getCiclos,
+  setCiclos
 };

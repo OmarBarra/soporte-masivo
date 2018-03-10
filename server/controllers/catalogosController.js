@@ -75,11 +75,41 @@ function setRegiones(req,res) {
   });
 }
 
+function ciclos(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getCiclos(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de ciclos Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setCiclos(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let ciclo = req.body.ciclo;
+  let activo = req.body.activo;
+  let descripcion = req.body.descripcion;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setCiclos(idCrud, id, ciclo, activo, descripcion)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de ciclos Activos', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
     producto,
     setProducto,
     regiones,
-    setRegiones
+    setRegiones,
+    ciclos,
+    setCiclos
 };
