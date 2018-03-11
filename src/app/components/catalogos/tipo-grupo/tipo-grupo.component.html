@@ -1,0 +1,57 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de Tipo Grupo</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">Tipo Grupos</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/tipoGrupo/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_GRUPO</th>
+                <th>GRUPO</th>
+                <th>DESCRIPCION</th>
+                <th>ACTIVO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of tipoGrupo'>
+                <td>{{ p.ID_TIPO_GRUPO}}</td>
+                <td>{{ p.GRUPO}}</td>
+                <td>{{ p.DESCRIPCION}}</td>
+                <td>{{ p.ACTIVO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/tipoGrupo/edit', p.ID_TIPO_GRUPO]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteTipoGrupo(p.ID_TIPO_GRUPO)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

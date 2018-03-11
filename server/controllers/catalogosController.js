@@ -131,6 +131,34 @@ function setEstatusTelefono(req,res) {
   });
 }
 
+function tipoGrupo(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getTipoGrupo(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de tipo grupo Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setTipoGrupo(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let grupo = req.body.grupo;
+  let activo = req.body.activo;
+  let descripcion = req.body.descripcion;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setTipoGrupo(idCrud, id, grupo, activo, descripcion)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de grupos Activos', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
@@ -141,5 +169,7 @@ module.exports = {
     ciclos,
     setCiclos,
     estatusTelefono,
-    setEstatusTelefono
+    setEstatusTelefono,
+    tipoGrupo,
+    setTipoGrupo
 };

@@ -411,6 +411,101 @@ function setEstatusTelefono(idCrud, id, estatus, activo, descripcion) {
   });
 }
 
+function getTipoGrupo(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM CAT_TIPO_GRUPO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM CAT_TIPO_GRUPO WHERE ID_TIPO_GRUPO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setTipoGrupo(idCrud, id, grupo, activo, descripcion) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO CAT_TIPO_GRUPO
+                          (
+                            GRUPO ,
+                            ACTIVO ,
+                            DESCRIPCION
+                          )
+                          VALUES
+                          (
+                            :grupo ,
+                            :activo ,
+                            :descripcion
+                          )`;
+
+        bindVars = {
+          grupo: grupo, // default direction is BIND_IN. Data type is inferred from the data
+          activo: +activo,
+          descripcion: descripcion
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE CAT_TIPO_GRUPO
+                  SET GRUPO      = :grupo ,
+                      ACTIVO          = :activo ,
+                      DESCRIPCION     = :descripcion
+                  WHERE ID_TIPO_GRUPO = :id`;
+
+        bindVars = {
+          id: id,
+          grupo: grupo, // default direction is BIND_IN. Data type is inferred from the data
+          activo: activo,
+          descripcion: descripcion,
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE CAT_TIPO_GRUPO
+                  WHERE ID_TIPO_GRUPO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
@@ -421,5 +516,7 @@ module.exports = {
   getCiclos,
   setCiclos,
   getEstatusTelefono,
-  setEstatusTelefono
+  setEstatusTelefono,
+  getTipoGrupo,
+  setTipoGrupo
 };

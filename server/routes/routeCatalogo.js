@@ -12,5 +12,7 @@ router.route('/getCiclos').get(controller.ciclos);
 router.route('/setCiclos').post(controller.setCiclos);
 router.route('/getEstatusTelefono').get(controller.estatusTelefono);
 router.route('/setEstatusTelefono').post(controller.setEstatusTelefono);
+router.route('/getTipoGrupo').get(controller.tipoGrupo);
+router.route('/setTipoGrupo').post(controller.setTipoGrupo);
 
 module.exports 	= router;
