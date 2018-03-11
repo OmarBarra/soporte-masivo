@@ -187,6 +187,33 @@ function setProceso(req,res) {
   });
 }
 
+function regionCiclo(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getRegionCiclo(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de región - ciclo', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setRegionCiclo(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let idRegion = req.body.idRegion;
+  let idCiclo = req.body.idCiclo;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setRegionCiclo(idCrud, id, idRegion, idCiclo)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de región - ciclo', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
@@ -201,5 +228,7 @@ module.exports = {
     tipoGrupo,
     setTipoGrupo,
     proceso,
-    setProceso
+    setProceso,
+    regionCiclo,
+    setRegionCiclo
 };

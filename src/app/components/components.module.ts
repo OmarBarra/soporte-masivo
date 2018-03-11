@@ -10,6 +10,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { RegionService } from '../services/region.service';
+import { CicloService } from '../services/ciclo.service';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     OwlDateTimeModule,
     OwlNativeDateTimeModule
   ],
-  declarations: [ComponentsComponent, HeaderComponent, SidebarComponent]
+  declarations: [ComponentsComponent, HeaderComponent, SidebarComponent],
+  providers: [RegionService, CicloService]
 })
 export class ComponentsModule { }

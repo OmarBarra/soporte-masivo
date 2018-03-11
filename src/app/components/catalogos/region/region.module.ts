@@ -12,7 +12,6 @@ import { RegionService } from '../../../services/region.service';
     ReactiveFormsModule,
     RegionRoutingModule
   ],
-  declarations: [RegionComponent, RegionEditComponent],
-  providers: [RegionService]
+  declarations: [RegionComponent, RegionEditComponent]
 })
 export class RegionModule { }

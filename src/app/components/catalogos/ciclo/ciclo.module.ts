@@ -12,7 +12,6 @@ import { CicloService } from '../../../services/ciclo.service';
     ReactiveFormsModule,
     CicloRoutingModule
   ],
-  declarations: [CicloComponent, CicloEditComponent],
-  providers: [CicloService]
+  declarations: [CicloComponent, CicloEditComponent]
 })
 export class CicloModule { }

@@ -601,6 +601,96 @@ function setProceso(idCrud, id, proceso, code, comentario) {
   });
 }
 
+function getRegionCiclo(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM REGION_CICLO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM REGION_CICLO WHERE ID_REGION_CICLO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setRegionCiclo(idCrud, id, idRegion, idCiclo) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO REGION_CICLO
+                          (
+                            ID_REGION ,
+                            ID_CICLO 
+                          )
+                          VALUES
+                          (
+                            :idRegion ,
+                            :idCiclo
+                          )`;
+
+        bindVars = {
+          idRegion: +idRegion, // default direction is BIND_IN. Data type is inferred from the data
+          idCiclo: +idCiclo
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE REGION_CICLO
+                  SET ID_REGION      = :idRegion ,
+                      ID_CICLO          = :idCiclo 
+                  WHERE ID_REGION_CICLO = :id`;
+
+        bindVars = {
+          id: id,
+          idRegion: +idRegion, // default direction is BIND_IN. Data type is inferred from the data
+          idCiclo: +idCiclo
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE REGION_CICLO
+                  WHERE ID_REGION_CICLO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
@@ -615,5 +705,7 @@ module.exports = {
   getTipoGrupo,
   setTipoGrupo,
   getProceso,
-  setProceso
+  setProceso,
+  getRegionCiclo,
+  setRegionCiclo
 };

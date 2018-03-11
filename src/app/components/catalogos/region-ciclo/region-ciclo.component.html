@@ -1,0 +1,55 @@
+<div [@routerTransition]>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de Region - Ciclo</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">Región - Ciclo</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/region-ciclo/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_REGION_CICLO</th>
+                <th>ID_REGION</th>
+                <th>ID_CICLO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of regionCiclo'>
+                <td>{{ p.ID_REGION_CICLO}}</td>
+                <td>{{ p.ID_REGION}}</td>
+                <td>{{ p.ID_CICLO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/region-ciclo/edit', p.ID_REGION_CICLO]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteRegionCiclo(p.ID_REGION_CICLO)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

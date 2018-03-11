@@ -16,5 +16,7 @@ router.route('/getTipoGrupo').get(controller.tipoGrupo);
 router.route('/setTipoGrupo').post(controller.setTipoGrupo);
 router.route('/getProceso').get(controller.proceso);
 router.route('/setProceso').post(controller.setProceso);
+router.route('/getRegionCiclo').get(controller.regionCiclo);
+router.route('/setRegionCiclo').post(controller.setRegionCiclo);
 
 module.exports 	= router;

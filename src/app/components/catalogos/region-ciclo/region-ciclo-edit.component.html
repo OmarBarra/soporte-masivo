@@ -1,0 +1,52 @@
+<div [@routerTransition]>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/region-ciclo']">Región - Ciclo</a>
+      </li>
+      <li class="breadcrumb-item active">{{ pageTitle }}</li>
+    </ol>
+  </nav>
+
+  <form [formGroup]="regionCicloForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="idRegion" class="col-sm-2 col-form-label">ID_REGION</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="selectedRegion" formControlName="ID_REGION" class="form-control" id="idRegion">
+          <option *ngFor="let region of regiones" value="{{region.ID_REGION}}">{{region.REGION}}</option>
+        </select>
+        <!-- <input type="text" class="form-control" id="idRegion" placeholder="ID_REGION" formControlName="ID_REGION" [ngClass]="{'is-invalid': regionCicloForm.dirty && !regionCicloForm.controls.ID_REGION.valid }">
+        <div *ngIf='!regionCicloForm.controls.ID_REGION.valid' class="invalid-feedback">
+          Campo Requerido
+        </div> -->
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="idCiclo" class="col-sm-2 col-form-label">ID_CICLO</label>
+      <div class="col-sm-4">
+        <select [(ngModel)]="selectedCiclo" formControlName="ID_CICLO" class="form-control" id="idCiclo">
+          <option *ngFor="let ciclo of ciclos" value="{{ciclo.ID_CICLO}}">{{ciclo.CICLO}} - {{ciclo.DESCRIPCION}}</option>
+        </select>
+        <!-- <input type="text" class="form-control" id="idCiclo" placeholder="ID_CICLO" formControlName="ID_CICLO" [ngClass]="{'is-invalid': regionCicloForm.dirty && !regionCicloForm.controls.ID_CICLO.valid }">
+              <div *ngIf='!regionCicloForm.controls.ID_CICLO.valid' class="invalid-feedback">
+                Campo Requerido
+              </div> -->
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-6">
+        <div *ngIf='errorMessage' class="text-danger">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" [disabled]="!regionCicloForm.valid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

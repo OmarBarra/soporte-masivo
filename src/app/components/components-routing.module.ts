@@ -17,6 +17,7 @@ const routes: Routes = [
           { path: 'producto', loadChildren: './catalogos/producto/producto.module#ProductoModule' },
           { path: 'region', loadChildren: './catalogos/region/region.module#RegionModule' },
           { path: 'ciclo', loadChildren: './catalogos/ciclo/ciclo.module#CicloModule' },
+          { path: 'region-ciclo', loadChildren: './catalogos/region-ciclo/region-ciclo.module#RegionCicloModule' },
           { path: 'estatusTelefono', loadChildren: './catalogos/estatus-telefono/estatus-telefono.module#EstatusTelefonoModule' },
           { path: 'tipoGrupo', loadChildren: './catalogos/tipo-grupo/tipo-grupo.module#TipoGrupoModule' },
           { path: 'proceso', loadChildren: './catalogos/proceso/proceso.module#ProcesoModule' }
