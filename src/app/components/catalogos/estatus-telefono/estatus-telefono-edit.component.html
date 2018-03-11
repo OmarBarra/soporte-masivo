@@ -1,0 +1,48 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/estatusTelefono']">EstatusTelefonos</a>
+      </li>
+      <li class="breadcrumb-item active">{{ pageTitle }}</li>
+    </ol>
+  </nav>
+
+  <form [formGroup]="estatusTelefonoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="estatusTelefono" class="col-sm-2 col-form-label">Estatus</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="estatusTelefono" placeholder="Estatus Telefono" formControlName="ESTATUS" [ngClass]="{'is-invalid': estatusTelefonoForm.dirty && !estatusTelefonoForm.controls.ESTATUS.valid }">
+        <div *ngIf='!estatusTelefonoForm.controls.ESTATUS.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="descripcion" class="col-sm-2 col-form-label">Descripcion</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="descripcion" placeholder="Descripcion" formControlName="DESCRIPCION" [ngClass]="{'is-invalid': estatusTelefonoForm.dirty && !estatusTelefonoForm.controls.DESCRIPCION.valid }">
+        <div *ngIf='!estatusTelefonoForm.controls.DESCRIPCION.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="activo" placeholder="activo" formControlName="ACTIVO" [ngClass]="{'is-invalid': estatusTelefonoForm.dirty && !estatusTelefonoForm.controls.ACTIVO.valid }">
+        <div *ngIf='!estatusTelefonoForm.controls.ACTIVO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" [disabled]="!estatusTelefonoForm.valid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

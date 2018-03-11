@@ -16,7 +16,8 @@ const routes: Routes = [
           { path: 'autorizacion', loadChildren: './autorizacion-plan/autorizacion-plan.module#AutorizacionPlanModule' },
           { path: 'producto', loadChildren: './catalogos/producto/producto.module#ProductoModule' },
           { path: 'region', loadChildren: './catalogos/region/region.module#RegionModule' },
-          { path: 'ciclo', loadChildren: './catalogos/ciclo/ciclo.module#CicloModule' }
+          { path: 'ciclo', loadChildren: './catalogos/ciclo/ciclo.module#CicloModule' },
+          { path: 'estatusTelefono', loadChildren: './catalogos/estatus-telefono/estatus-telefono.module#EstatusTelefonoModule' }
         ]
     }
 ];

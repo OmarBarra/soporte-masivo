@@ -103,6 +103,34 @@ function setCiclos(req,res) {
   });
 }
 
+function estatusTelefono(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getEstatusTelefono(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de estatus telefono Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setEstatusTelefono(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let estatus = req.body.estatus;
+  let activo = req.body.activo;
+  let descripcion = req.body.descripcion;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setEstatusTelefono(idCrud, id, estatus, activo, descripcion)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de estatuss Activos', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
@@ -111,5 +139,7 @@ module.exports = {
     regiones,
     setRegiones,
     ciclos,
-    setCiclos
+    setCiclos,
+    estatusTelefono,
+    setEstatusTelefono
 };

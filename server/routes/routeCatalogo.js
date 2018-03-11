@@ -10,5 +10,7 @@ router.route('/getRegiones').get(controller.regiones);
 router.route('/setRegiones').post(controller.setRegiones);
 router.route('/getCiclos').get(controller.ciclos);
 router.route('/setCiclos').post(controller.setCiclos);
+router.route('/getEstatusTelefono').get(controller.estatusTelefono);
+router.route('/setEstatusTelefono').post(controller.setEstatusTelefono);
 
 module.exports 	= router;

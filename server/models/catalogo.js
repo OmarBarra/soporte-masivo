@@ -316,6 +316,101 @@ function setCiclos(idCrud, id, ciclo, activo, descripcion) {
   });
 }
 
+function getEstatusTelefono(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM CAT_ESTATUS_TELEFONO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM CAT_ESTATUS_TELEFONO WHERE ID_ESTATUS_TELEFONO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setEstatusTelefono(idCrud, id, estatus, activo, descripcion) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO CAT_ESTATUS_TELEFONO
+                          (
+                            ESTATUS ,
+                            ACTIVO ,
+                            DESCRIPCION
+                          )
+                          VALUES
+                          (
+                            :estatus ,
+                            :activo ,
+                            :descripcion
+                          )`;
+
+        bindVars = {
+          estatus: estatus, // default direction is BIND_IN. Data type is inferred from the data
+          activo: +activo,
+          descripcion: descripcion
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE CAT_ESTATUS_TELEFONO
+                  SET ESTATUS      = :estatus ,
+                      ACTIVO          = :activo ,
+                      DESCRIPCION     = :descripcion
+                  WHERE ID_ESTATUS_TELEFONO = :id`;
+
+        bindVars = {
+          id: id,
+          estatus: estatus, // default direction is BIND_IN. Data type is inferred from the data
+          activo: activo,
+          descripcion: descripcion,
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE CAT_ESTATUS_TELEFONO
+                  WHERE ID_ESTATUS_TELEFONO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
@@ -324,5 +419,7 @@ module.exports = {
   getRegiones,
   setRegiones,
   getCiclos,
-  setCiclos
+  setCiclos,
+  getEstatusTelefono,
+  setEstatusTelefono
 };

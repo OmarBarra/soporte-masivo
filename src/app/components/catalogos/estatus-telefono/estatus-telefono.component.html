@@ -1,0 +1,57 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de EstatusTelefono</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">EstatusTelefonos</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/estatusTelefono/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_ESTATUS</th>
+                <th>ESTATUS</th>
+                <th>DESCRIPCION</th>
+                <th>ACTIVO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of estatusTelefono'>
+                <td>{{ p.ID_ESTATUS_TELEFONO}}</td>
+                <td>{{ p.ESTATUS}}</td>
+                <td>{{ p.DESCRIPCION}}</td>
+                <td>{{ p.ACTIVO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/estatusTelefono/edit', p.ID_ESTATUS_TELEFONO]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteEstatusTelefono(p.ID_ESTATUS_TELEFONO)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
