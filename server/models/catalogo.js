@@ -506,6 +506,101 @@ function setTipoGrupo(idCrud, id, grupo, activo, descripcion) {
   });
 }
 
+function getProceso(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM CAT_PROCESO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM CAT_PROCESO WHERE ID_PROCESO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setProceso(idCrud, id, proceso, code, comentario) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO CAT_PROCESO
+                          (
+                            PROCESO ,
+                            CODE ,
+                            COMENTARIO
+                          )
+                          VALUES
+                          (
+                            :proceso ,
+                            :code ,
+                            :comentario
+                          )`;
+
+        bindVars = {
+          proceso: proceso, // default direction is BIND_IN. Data type is inferred from the data
+          code: code,
+          comentario: +comentario
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE CAT_PROCESO
+                  SET PROCESO      = :proceso ,
+                      CODE          = :code ,
+                      COMENTARIO     = :comentario
+                  WHERE ID_PROCESO = :id`;
+
+        bindVars = {
+          id: id,
+          proceso: proceso, // default direction is BIND_IN. Data type is inferred from the data
+          code: code,
+          comentario: comentario,
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE CAT_PROCESO
+                  WHERE ID_PROCESO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
@@ -518,5 +613,7 @@ module.exports = {
   getEstatusTelefono,
   setEstatusTelefono,
   getTipoGrupo,
-  setTipoGrupo
+  setTipoGrupo,
+  getProceso,
+  setProceso
 };

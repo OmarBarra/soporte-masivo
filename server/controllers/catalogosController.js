@@ -159,6 +159,34 @@ function setTipoGrupo(req,res) {
   });
 }
 
+function proceso(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getProceso(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de procesos Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setProceso(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let proceso = req.body.proceso;
+  let code = req.body.code;
+  let comentario = req.body.comentario;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setProceso(idCrud, id, proceso, code, comentario)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de procesos Activos', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
 module.exports = {
     region,
     ciclo,
@@ -171,5 +199,7 @@ module.exports = {
     estatusTelefono,
     setEstatusTelefono,
     tipoGrupo,
-    setTipoGrupo
+    setTipoGrupo,
+    proceso,
+    setProceso
 };

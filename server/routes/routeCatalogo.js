@@ -14,5 +14,7 @@ router.route('/getEstatusTelefono').get(controller.estatusTelefono);
 router.route('/setEstatusTelefono').post(controller.setEstatusTelefono);
 router.route('/getTipoGrupo').get(controller.tipoGrupo);
 router.route('/setTipoGrupo').post(controller.setTipoGrupo);
+router.route('/getProceso').get(controller.proceso);
+router.route('/setProceso').post(controller.setProceso);
 
 module.exports 	= router;

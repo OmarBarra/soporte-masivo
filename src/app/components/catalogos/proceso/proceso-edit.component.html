@@ -1,0 +1,48 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/proceso']">Procesos</a>
+      </li>
+      <li class="breadcrumb-item active">{{ pageTitle }}</li>
+    </ol>
+  </nav>
+
+  <form [formGroup]="procesoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group row">
+      <label for="proceso" class="col-sm-2 col-form-label">Proceso</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="proceso" placeholder="Proceso" formControlName="PROCESO" [ngClass]="{'is-invalid': procesoForm.dirty && !procesoForm.controls.PROCESO.valid }">
+        <div *ngIf='!procesoForm.controls.PROCESO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="code" class="col-sm-2 col-form-label">Code</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="code" placeholder="Code" formControlName="CODE" [ngClass]="{'is-invalid': procesoForm.dirty && !procesoForm.controls.CODE.valid }">
+        <div *ngIf='!procesoForm.controls.CODE.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="comentario" class="col-sm-2 col-form-label">Comentario</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="comentario" placeholder="comentario" formControlName="COMENTARIO" [ngClass]="{'is-invalid': procesoForm.dirty && !procesoForm.controls.COMENTARIO.valid }">
+        <div *ngIf='!procesoForm.controls.COMENTARIO.valid' class="invalid-feedback">
+          Campo Requerido
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        <button type="submit" class="btn btn-primary" [disabled]="!procesoForm.valid">Guardar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,57 @@
+<div [@routerTransition] style="height: 600px">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de Proceso</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">Procesos</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/proceso/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_PROCESO</th>
+                <th>PROCESO</th>
+                <th>CODE</th>
+                <th>COMENTARIO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of procesos'>
+                <td>{{ p.ID_PROCESO}}</td>
+                <td>{{ p.PROCESO}}</td>
+                <td>{{ p.CODE}}</td>
+                <td>{{ p.COMENTARIO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/proceso/edit', p.ID_PROCESO]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteProceso(p.ID_PROCESO)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
