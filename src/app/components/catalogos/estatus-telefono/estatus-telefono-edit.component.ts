@@ -76,9 +76,9 @@ export class EstatusTelefonoEditComponent implements OnInit {
     this.estatusTelefono[0] = estatusTelefono;
 
     if (this.estatusTelefono[0].ID_ESTATUS_TELEFONO === 0) {
-      this.pageTitle = 'Agregar EstatusTelefono';
+      this.pageTitle = 'Agregar Estatus Telefono';
     } else {
-      this.pageTitle = `Editar EstatusTelefono: ${this.estatusTelefono[0].DESCRIPCION}`;
+      this.pageTitle = `Editar Estatus Telefono: ${this.estatusTelefono[0].DESCRIPCION}`;
     }
 
     // Update the data on the form
