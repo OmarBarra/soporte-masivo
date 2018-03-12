@@ -20,7 +20,8 @@ const routes: Routes = [
           { path: 'region-ciclo', loadChildren: './catalogos/region-ciclo/region-ciclo.module#RegionCicloModule' },
           { path: 'estatusTelefono', loadChildren: './catalogos/estatus-telefono/estatus-telefono.module#EstatusTelefonoModule' },
           { path: 'tipoGrupo', loadChildren: './catalogos/tipo-grupo/tipo-grupo.module#TipoGrupoModule' },
-          { path: 'proceso', loadChildren: './catalogos/proceso/proceso.module#ProcesoModule' }
+          { path: 'proceso', loadChildren: './catalogos/proceso/proceso.module#ProcesoModule' },
+          { path: 'usuario', loadChildren: './catalogos/usuario/usuario.module#UsuarioModule' }
         ]
     }
 ];

@@ -12,6 +12,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { RegionService } from '../services/region.service';
 import { CicloService } from '../services/ciclo.service';
+import { PerfilService } from '../services/perfil.service';
 
 
 @NgModule({
@@ -24,6 +25,6 @@ import { CicloService } from '../services/ciclo.service';
     OwlNativeDateTimeModule
   ],
   declarations: [ComponentsComponent, HeaderComponent, SidebarComponent],
-  providers: [RegionService, CicloService]
+  providers: [RegionService, CicloService, PerfilService]
 })
 export class ComponentsModule { }

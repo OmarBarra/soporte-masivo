@@ -1,0 +1,57 @@
+<div [@routerTransition]>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a [routerLink]="['/inicio']">Inicio</a>
+      </li>
+      <li class="breadcrumb-item active">Catálogo de Usuario</li>
+    </ol>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-faded">
+          <span class="pull-left">Usuarios</span>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <a class="btn btn-success mb-2" [routerLink]="['/usuario/edit', 0]">
+                Nuevo
+              </a>
+            </div>
+          </div>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>ID_USUARIO</th>
+                <th>ID_PERFIL</th>
+                <th>USUARIO</th>
+                <th>ACTIVO</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor='let p of usuarios'>
+                <td>{{ p.ID_USUARIO}}</td>
+                <td>{{ p.ID_PERFIL}}</td>
+                <td>{{ p.USUARIO}}</td>
+                <td>{{ p.ACTIVO}}</td>
+                <td>
+                  <a class="btn btn-primary" [routerLink]="['/usuario/edit', p.ID_USUARIO]">
+                    Editar
+                  </a>
+                  <a class="btn btn-danger" (click)='deleteUsuario(p.ID_USUARIO)'>
+                    Borrar
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

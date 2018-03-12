@@ -18,5 +18,8 @@ router.route('/getProceso').get(controller.proceso);
 router.route('/setProceso').post(controller.setProceso);
 router.route('/getRegionCiclo').get(controller.regionCiclo);
 router.route('/setRegionCiclo').post(controller.setRegionCiclo);
+router.route('/getUsuario').get(controller.usuario);
+router.route('/setUsuario').post(controller.setUsuario);
+router.route('/getPerfil').get(controller.perfil);
 
 module.exports 	= router;

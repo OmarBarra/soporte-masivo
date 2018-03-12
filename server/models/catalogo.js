@@ -691,6 +691,131 @@ function setRegionCiclo(idCrud, id, idRegion, idCiclo) {
   });
 }
 
+function getUsuario(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM USUARIO';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM USUARIO WHERE ID_USUARIO = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
+function setUsuario(idCrud, id, idPerfil, usuario, activo) {
+  return new Promise((resolve, reject) => {
+    let bindVars = '';
+    let query = '';
+    
+    switch (+idCrud) {
+      case 1: {
+        query = `INSERT INTO USUARIO
+                          (
+                            ID_PERFIL ,
+                            USUARIO ,
+                            ACTIVO
+                          )
+                          VALUES
+                          (
+                            :idPerfil ,
+                            :usuario ,
+                            :activo
+                          )`;
+
+        bindVars = {
+          idPerfil: +idPerfil, // default direction is BIND_IN. Data type is inferred from the data
+          usuario: usuario,
+          activo: +activo,
+        }
+        break;
+      }
+      case 2: {
+        query = `UPDATE USUARIO
+                  SET ID_PERFIL  = :idPerfil ,
+                      USUARIO    = :usuario ,
+                      ACTIVO     = :activo
+                  WHERE ID_USUARIO = :id`;
+
+        bindVars = {
+          id: id,
+          idPerfil: +idPerfil, // default direction is BIND_IN. Data type is inferred from the data
+          usuario: usuario,
+          activo: +activo,
+        }
+        break;
+      }
+      case 3: {
+        query = `DELETE USUARIO
+                  WHERE ID_USUARIO = :id`;
+
+        bindVars = {
+          id: id
+        }
+        break;
+      }
+    }
+
+    conn.execute( query, bindVars, {autoCommit : true}, (err,result) => {
+      if (!err) {
+        console.log(result);
+        resolve(result);
+      }else {
+        console.log(err);
+        reject();
+      }
+    });
+  });
+}
+
+function getPerfil(id) {
+  return new Promise((resolve, reject) => {
+    let query = '';
+    console.log(id);
+    if (!id) {
+      query = 'SELECT * FROM CAT_PERFIL';
+      conn.execute( query, (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    } else {
+      query = 'SELECT * FROM CAT_PERFIL WHERE ID_PERFIL = :id';
+      conn.execute( query, [id], (err,result) => {
+        if (!err) {
+          console.log(result);
+          resolve(result);
+        }else {
+          console.log(err);
+          reject();
+        }
+      });
+    }
+  });
+}
+
 module.exports = {
   getRegion,
   getCiclo,
@@ -707,5 +832,8 @@ module.exports = {
   getProceso,
   setProceso,
   getRegionCiclo,
-  setRegionCiclo
+  setRegionCiclo,
+  getUsuario,
+  setUsuario,
+  getPerfil
 };

@@ -1,0 +1,58 @@
+<div [@routerTransition]>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/inicio']">Inicio</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a [routerLink]="['/usuario']">Usuarios</a>
+        </li>
+        <li class="breadcrumb-item active">{{ pageTitle }}</li>
+      </ol>
+    </nav>
+  
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+        <label for="usuario" class="col-sm-2 col-form-label">Usuario</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="usuario" placeholder="Usuario" formControlName="USUARIO" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.USUARIO.valid }">
+          <div *ngIf='!productForm.controls.USUARIO.valid' class="invalid-feedback">
+            Campo Requerido
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="descripcion" class="col-sm-2 col-form-label">ID_PERFIL</label>
+        <div class="col-sm-4">
+          <select [(ngModel)]="selectedPerfil" formControlName="ID_PERFIL" class="form-control" id="idPerfil">
+            <option *ngFor="let perfil of perfiles" value="{{perfil.ID_PERFIL}}">{{perfil.ID_PERFIL}} - {{perfil.PERFIL }}</option>
+          </select>
+          <!-- <input type="text" class="form-control" id="descripcion" placeholder="ID_PERFIL" formControlName="ID_PERFIL" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.ID_PERFIL.valid }">
+                <div *ngIf='!productForm.controls.ID_PERFIL.valid' class="invalid-feedback">
+                  Campo Requerido
+                </div> -->
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="activo" class="col-sm-2 col-form-label">Activo</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="activo" placeholder="activo" formControlName="ACTIVO" [ngClass]="{'is-invalid': productForm.dirty && !productForm.controls.ACTIVO.valid }">
+          <div *ngIf='!productForm.controls.ACTIVO.valid' class="invalid-feedback">
+            Campo Requerido
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+          <div class="col-sm-6">
+            <div *ngIf='errorMessage' class="text-danger">
+              {{ errorMessage }}
+            </div>
+          </div>
+        </div>
+      <div class="form-group row">
+        <div class="col-sm-4">
+          <button type="submit" class="btn btn-primary" [disabled]="!productForm.valid">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </div>

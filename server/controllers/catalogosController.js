@@ -214,6 +214,45 @@ function setRegionCiclo(req,res) {
   });
 }
 
+function usuario(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getUsuario(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de usuarios Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
+function setUsuario(req,res) {
+  let idCrud = req.body.idCrud;
+  let id = req.body.id;
+  let idPerfil = req.body.idPerfil;
+  let usuario = req.body.usuario;
+  let activo = req.body.activo;
+
+  console.log(JSON.stringify(req.body));
+
+  Catalogo.setUsuario(idCrud, id, idPerfil, usuario, activo)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de procesos Activos', data: JSON.stringify(result)};
+    res.json(response);
+  });
+}
+
+function perfil(req,res) {
+  let id = req.query.id;
+ console.log('query: ' + JSON.stringify(req.query));
+  Catalogo.getPerfil(id)
+  .then((result)=>{
+    console.log(JSON.stringify(result));
+    let response = {success:1, msg:'Catalogo de perfiles Activos', data: aux.fetchArray( result )};
+    res.json(response)
+  });
+}
+
 module.exports = {
     region,
     ciclo,
@@ -230,5 +269,8 @@ module.exports = {
     proceso,
     setProceso,
     regionCiclo,
-    setRegionCiclo
+    setRegionCiclo,
+    usuario,
+    setUsuario,
+    perfil
 };
